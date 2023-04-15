@@ -2,14 +2,14 @@ import discord
 import openai
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from config import DISCORD_TOKEN, OPENAI_API_KEY, PG_URL
+from config import DISCORD_TOKEN, OPENAI_API_KEY, DB_URL
 from models import Entry, Base
 
 # Set the OpenAI API key
 openai.api_key = OPENAI_API_KEY
 
 # Set up the SQLAlchemy engine and session
-engine = create_engine(PG_URL)
+engine = create_engine(DB_URL)
 Session = sessionmaker(bind=engine)
 session = Session()
 

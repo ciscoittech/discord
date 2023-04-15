@@ -17,5 +17,5 @@ OPENAI_API_KEY = os.getenv("OPEN_AI_KEY")
 
 
 
-# DB_URL = "sqlite:///discord.db"
-PG_URL = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+DB_URL = "sqlite:///discord.db"
+# PG_URL = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
