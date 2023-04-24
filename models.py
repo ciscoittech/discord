@@ -9,5 +9,7 @@ class Entry(Base):
 
     id = Column(Integer, primary_key=True)
     user_id = Column(BigInteger, nullable=False)
+    username = Column(String, nullable=False)
     user_message = Column(String, nullable=False)
     bot_response = Column(String, nullable=False)
+    resume_filename = Column(String)

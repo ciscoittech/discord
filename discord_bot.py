@@ -28,12 +28,17 @@ async def on_ready():
     print(f"Logged in as {client.user.name} ({client.user.id})")
 
 
+
 # Define an event for when a message is sent in the server
 @client.event
 async def on_message(message):
     # Ignore messages sent by the bot itself
     if message.author == client.user:
         return
+
+    # Get the user ID and username from the message object
+    user_id = message.author.id
+    username = message.author.name
 
     # Generate a response using OpenAI's Chat API
     response = openai.ChatCompletion.create(
@@ -42,7 +47,7 @@ async def on_message(message):
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": message.content},
         ],
-        max_tokens=100,
+        max_tokens=500,
         temperature=0.5,
     )
 
@@ -51,10 +56,11 @@ async def on_message(message):
     await message.channel.send(bot_response)
 
     # Store the entry in the PostgreSQL database using SQLAlchemy
-    entry = Entry(user_id=message.author.id, user_message=message.content, bot_response=bot_response)
+    entry = Entry(user_id=user_id, username=username, user_message=message.content, bot_response=bot_response)
     session.add(entry)
     session.commit()
 
 
 # Start the bot
 client.run(DISCORD_TOKEN)
+
